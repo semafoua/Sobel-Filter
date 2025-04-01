@@ -30,6 +30,29 @@ def read_img(filename):
         return (img)
 
 
+def sobel_img(img): #an array of [row][pixel][value,value,value]
+    for y in range(len(img)):
+        for x in range(len(img[y])): #pixels
+            pixelLeft = img[y][x-1]
+            pixel = img[y][x]
+            pixelRight = img[y][x+1]
+            if (x == 0 or x == len(img) - 1):
+                newPixelVal == pixel[0] #assuming greyscale
+
+            else:
+                left = pixelLeft[0] * -1
+                center = pixel[0]
+                right = pixelRight[0] * 1
+                newPixelVal = abs(left + center + right)
+
+            pixel[0] = newPixelVal
+            pixel[1] = newPixelVal
+            pixel[2] = newPixelVal
+    
+    return img
+
+    
+
 
 
 def write_img(img, filename):
@@ -44,4 +67,5 @@ def write_img(img, filename):
                 for channel in px:
                     f.write(f"{channel} ")
             f.write("\n")
+
 
